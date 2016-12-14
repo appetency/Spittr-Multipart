@@ -63,7 +63,7 @@ public class SpitterController {
     Spitter spitter = spitterForm.toSpitter();
     spitterRepository.save(spitter);
     MultipartFile profilePicture = spitterForm.getProfilePicture();
-    profilePicture.transferTo(new File("/tmp/spittr/" + spitter.getUsername() + ".jpg"));
+    profilePicture.transferTo(new File("/tmp/spittr/" + spitter.getUsername() + ".jpg"));  //将上传的文件写入到文件系统中
     return "redirect:/spitter/" + spitter.getUsername();
   }
   
