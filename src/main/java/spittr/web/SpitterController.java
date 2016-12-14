@@ -76,6 +76,21 @@ public class SpitterController {
   以username中所有的不安全字符都会进行转义。这样会更加安全，这里允许用户输入任何想
   要的内容作为username，并会将其附加到路径上。
 */
+
+ /* @RequestMapping(value = "/register",method = POST)
+  public String processRegistration(Spitter spitter,RedirectAttributes model){
+    spitterRepository.save(spitter);
+    model.addAttribute("username",spitter.getUsername());
+    model.addAttribute("spitter",spitter);
+    return "redirect:/spitter/{username}";
+  }
+  我们调用了addFlashAttribute()方法，并将spitter作为key，Spitter对象作
+  为值。另外，我们还可以不设置key参数，让key根据值的类型自行推断得出：
+  因为我们传递了一个Spitter对象给addFlashAttribute()方法，所以推断得到的key将
+  会是spitter。
+  在重定向执行之前，所有的flash属性都会复制到会话中。在重定向后，存在会话中的flash属性
+  会被取出，并从会话转移到模型之中。处理重定向的方法就能从模型中访问Spitter对象了，就
+  像获取其他的模型对象一样。*/
   @RequestMapping(value="/{username}", method=GET)
   public String showSpitterProfile(
           @PathVariable String username, Model model) {
