@@ -64,9 +64,18 @@ public class SpitterController {
     spitterRepository.save(spitter);
     MultipartFile profilePicture = spitterForm.getProfilePicture();
     profilePicture.transferTo(new File("/tmp/spittr/" + spitter.getUsername() + ".jpg"));  //将上传的文件写入到文件系统中
-    return "redirect:/spitter/" + spitter.getUsername();
+    return "redirect:/spitter/" + spitter.getUsername();   /*重定向*/
   }
-  
+  /*@RequestMapping(value = "/register",method = POST)
+  public String processRegistration(Spitter spitter,Model model){
+    spitterRepository.save(spitter);
+    model.addAttribute("username",spitter.getUsername());
+    return "redirect:/spitter/{username}";
+  }
+  username作为占位符填充到了URL模板中，而不是直接连接到重定向String中，所
+  以username中所有的不安全字符都会进行转义。这样会更加安全，这里允许用户输入任何想
+  要的内容作为username，并会将其附加到路径上。
+*/
   @RequestMapping(value="/{username}", method=GET)
   public String showSpitterProfile(
           @PathVariable String username, Model model) {
